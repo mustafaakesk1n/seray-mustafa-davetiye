@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seray & Mustafa'nın Düğün Davetiyesi</title>
+    
+    <!-- Google Fonts Entegrasyonu -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* Sayfa içi yumuşak kayma efekti */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Genel sayfa stilleri */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+            background-image: url('davetiye.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+            display: flex;
+            flex-direction: row; /* Sol menü ve sağ içerik yan yana dursun diye */
+            justify-content: center;
+            align-items: flex-start;
+            color: #333;
+        }
+
+        /* Sol Tarafa Sabitlenen Menü Stili */
+        .sol-menu {
+            position: fixed;
+            left: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 25px 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            width: 220px;
+        }
+
+        .sol-menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sol-menu li {
+            margin-bottom: 15px;
+        }
+
+        .sol-menu li:last-child {
+            margin-bottom: 0;
+        }
+
+        .sol-menu a {
+            text-decoration: none;
+            color: #2c3e50;
+            font-weight: 600;
+            font-size: 0.95em;
+            display: block;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        /* Menü linklerine gelindiğinde (Hover) efekt */
+        .sol-menu a:hover {
+            background-color: #4a6741;
+            color: white;
+            padding-left: 18px; /* Hafif sağa kayma efekti */
+        }
+
+        /* Sayfa içeriğini toplayan sağ taraftaki şeffaf panel */
+        .container {
+            width: 90%;
+            max-width: 600px;
+            background-color: rgba(255, 255, 255, 0.92);
+            margin-top: 40px;
+            margin-bottom: 40px;
+            margin-left: 120px; /* Menünün üstüne binmesin diye soldan boşluk verdik */
+            padding: 30px 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+
+        /* Üst Başlık */
+        .davet-baslik {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.8em;
+            color: #4a6741;
+            margin-bottom: 5px;
+            text-align: center;
+            font-weight: normal;
+        }
+
+        /* Çift İsimleri */
+        .cift-isimleri {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.8em;
+            color: #2c3e50;
+            margin-top: 0;
+            margin-bottom: 25px;
+            text-align: center;
+            font-weight: normal;
+            letter-spacing: 1px;
+        }
+
+        /* Video Bölümü Stili */
+        #video-bolumu {
+            width: 100%;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            margin-bottom: 35px;
+            background-color: #000;
+            scroll-margin-top: 40px; /* Menüden tıklayınca tam hizada dursun */
+        }
+
+        video {
+            width: 100%;
+            display: block;
+        }
+
+        /* Konum Alanı Genel Stilleri */
+        .konum-konteyner {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 35px;
+            scroll-margin-top: 40px; /* Menüden tıklayınca tam hizada dursun */
+        }
+
+        .konum-baslik {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        /* Google Maps Yol Tarifi Butonu */
+        .harita-buton {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #4a6741;
+            color: white;
+            text-decoration: none;
+            padding: 12px 25px;
+            font-size: 0.95em;
+            font-weight: 600;
+            border-radius: 30px;
+            box-shadow: 0 4px 10px rgba(74, 103, 65, 0.3);
+            transition: all 0.3s ease;
+            margin-bottom: 15px;
+            width: 80%;
+            text-align: center;
+        }
+
+        .harita-buton:hover {
+            background-color: #384e31;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(74, 103, 65, 0.4);
+        }
+
+        /* Küçük Harita Önizleme Alanı */
+        .harita-onizleme {
+            width: 100%;
+            height: 280px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .harita-onizleme iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Görsel Davetiye Bölümü Stilleri */
+        .gorsel-davetiye-konteyner {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 15px;
+            scroll-margin-top: 40px; /* Menüden tıklayınca tam hizada dursun */
+        }
+
+        .gorsel-baslik {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            letter-spacing: 0.5px;
+        }
+
+        .davetiye-resim {
+            width: 100%;
+            max-width: 450px;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            border: 4px solid #fff;
+        }
+
+        /* 📱 MOBİL UYUMLULUK AYARLARI (Ekran küçüldüğünde menüyü üste alır) */
+        @media (max-width: 900px) {
+            body {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .sol-menu {
+                position: fixed;
+                left: 0;
+                top: 0;
+                transform: none;
+                width: 100%;
+                padding: 10px 0;
+                border-radius: 0;
+                box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            }
+
+            .sol-menu ul {
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+            }
+
+            .sol-menu li {
+                margin-bottom: 0;
+            }
+
+            .sol-menu a {
+                font-size: 0.8em;
+                padding: 6px 10px;
+            }
+
+            .sol-menu a:hover {
+                padding-left: 10px;
+                background-color: #4a6741;
+            }
+
+            .container {
+                margin-left: 0;
+                margin-top: 80px; /* Üstteki menünün altında kalmasın diye */
+                width: 85%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sol Menü Bölümü -->
+    <nav class="sol-menu">
+        <ul>
+            <li><a href="#video-bolumu">1. Davetiye</a></li>
+            <li><a href="#dugun-salonu">2. Düğün Salonu</a></li>
+            <li><a href="#erkek-evi">3. Erkek Evi</a></li>
+            <li><a href="#davetiye-karti">4. Davetiye Kartı</a></li>
+        </ul>
+    </nav>
+
+    <!-- İçerik Paneli -->
+    <div class="container">
+
+        <!-- Başlıklar -->
+        <h1 class="davet-baslik">Düğünümüze Davetlisiniz...</h1>
+        <h2 class="cift-isimleri">Seray & Mustafa</h2>
+
+        <!-- 1. Bölüm: Düğün Davetiyesi Videosu -->
+        <div id="video-bolumu">
+            <video controls autoplay loop muted playsinline>
+                <source src="davetiye_video.mp4" type="video/mp4">
+                Tarayıcınız video etiketini desteklemiyor.
+            </video>
+        </div>
+
+        <!-- 2. Bölüm: Düğün Yeri Konumu -->
+        <div class="konum-konteyner" id="dugun-salonu">
+            <div class="konum-baslik">📍 Düğün Salonu Konumu</div>
+            <a href="https://maps.app.goo.gl/3EShF38dZWVp1t2TA" target="_blank" class="harita-buton">
+                Google Maps ile Yol Tarifi Al
+            </a>
+            <div class="harita-onizleme">
+                <iframe src="https://maps.google.com/maps?q=Alyans%20D%C3%BC%C4%9F%C3%BCn%20Salonu,%20Efirl%C4%B1,%20Ordu&t=&z=16&ie=UTF8&iwloc=&output=embed" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+
+        <!-- 3. Bölüm: Erkek Evi Konumu -->
+        <div class="konum-konteyner" id="erkek-evi">
+            <div class="konum-baslik">🏠 Erkek Evi (Yemek İkramı) Konumu</div>
+            <a href="https://maps.app.goo.gl/WXMnQDxberdP3q6E7" target="_blank" class="harita-buton">
+                Google Maps ile Yol Tarifi Al
+            </a>
+            <div class="harita-onizleme">
+                <iframe src="https://maps.google.com/maps?q=Bah%C3%A7elievler%20Mahallesi,%20Denizciler%20Caddesi,%20No:33,%20Ordu&t=&z=16&ie=UTF8&iwloc=&output=embed" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+
+        <!-- 4. Bölüm: Görsel Davetiye -->
+        <div class="gorsel-davetiye-konteyner" id="davetiye-karti">
+            <div class="gorsel-baslik">✉️ Davetiye Kartı</div>
+            <img src="davetiye.jpeg" alt="Düğün Davetiyesi" class="davetiye-resim">
+        </div>
+
+    </div>
+
+</body>
+</html>
