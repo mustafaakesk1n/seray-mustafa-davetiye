@@ -21,31 +21,32 @@
             margin: 0;
             padding: 0;
             font-family: 'Montserrat', sans-serif;
-            background-image: url('davetiye.jpg');
+            background-image: url('arkaplan.jpeg'); /* Düzenlediğin sade arkaplan görseli */
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-position: center;
             display: flex;
-            flex-direction: row; /* Sol menü ve sağ içerik yan yana dursun diye */
+            flex-direction: row;
             justify-content: center;
             align-items: flex-start;
             color: #333;
         }
 
-        /* Sol Tarafa Sabitlenen Menü Stili */
+        /* Sol Tarafa Sabitlenen Dinamik Menü Stili */
         .sol-menu {
             position: fixed;
-            left: 40px;
+            left: 20px;
             top: 50%;
             transform: translateY(-50%);
             background-color: rgba(255, 255, 255, 0.95);
-            padding: 25px 20px;
+            padding: 20px 15px;
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.15);
             backdrop-filter: blur(5px);
             z-index: 1000;
-            width: 220px;
+            width: 190px;
+            transition: all 0.3s ease;
         }
 
         .sol-menu ul {
@@ -55,7 +56,7 @@
         }
 
         .sol-menu li {
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
 
         .sol-menu li:last-child {
@@ -66,9 +67,9 @@
             text-decoration: none;
             color: #2c3e50;
             font-weight: 600;
-            font-size: 0.95em;
+            font-size: 0.82em;
             display: block;
-            padding: 8px 12px;
+            padding: 8px 10px;
             border-radius: 8px;
             transition: all 0.3s ease;
         }
@@ -77,17 +78,16 @@
         .sol-menu a:hover {
             background-color: #4a6741;
             color: white;
-            padding-left: 18px; /* Hafif sağa kayma efekti */
+            padding-left: 14px;
         }
 
-        /* Sayfa içeriğini toplayan sağ taraftaki şeffaf panel */
+        /* Sayfa içeriğini toplayan şeffaf panel */
         .container {
             width: 90%;
             max-width: 600px;
             background-color: rgba(255, 255, 255, 0.92);
             margin-top: 40px;
             margin-bottom: 40px;
-            margin-left: 120px; /* Menünün üstüne binmesin diye soldan boşluk verdik */
             padding: 30px 20px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.15);
             border-radius: 20px;
@@ -95,6 +95,7 @@
             flex-direction: column;
             align-items: center;
             backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
         }
 
         /* Üst Başlık */
@@ -127,7 +128,7 @@
             box-shadow: 0 8px 20px rgba(0,0,0,0.1);
             margin-bottom: 35px;
             background-color: #000;
-            scroll-margin-top: 40px; /* Menüden tıklayınca tam hizada dursun */
+            scroll-margin-top: 40px;
         }
 
         video {
@@ -135,22 +136,44 @@
             display: block;
         }
 
-        /* Konum Alanı Genel Stilleri */
-        .konum-konteyner {
+        /* Konum ve Paylaşım Alanı Genel Stilleri */
+        .konum-konteyner, .paylasim-konteyner {
             width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
             margin-bottom: 35px;
-            scroll-margin-top: 40px; /* Menüden tıklayınca tam hizada dursun */
+            scroll-margin-top: 40px;
         }
 
-        .konum-baslik {
+        .konum-baslik, .paylasim-baslik {
             font-size: 1.2em;
             font-weight: 600;
             color: #2c3e50;
             margin-bottom: 10px;
             letter-spacing: 0.5px;
+            text-align: center;
+        }
+
+        /* Adres ve Bilgilendirme Yazısı Stili */
+        .acik-adres, .paylasim-detay {
+            font-size: 0.9em;
+            color: #555;
+            margin-top: -5px;
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-align: center;
+            line-height: 1.4;
+            padding: 0 10px;
+        }
+
+        /* Zaman Bilgisi Stili */
+        .zaman-bilgisi {
+            font-size: 0.9em;
+            color: #c0392b;
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-align: center;
         }
 
         /* Google Maps Yol Tarifi Butonu */
@@ -178,6 +201,56 @@
             box-shadow: 0 6px 15px rgba(74, 103, 65, 0.4);
         }
 
+        /* Güvenli Fotoğraf Yükleme Butonu Stili */
+        .yukle-buton {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #d35400; /* Şık ve dikkat çekici turuncu tonu */
+            color: white;
+            text-decoration: none;
+            padding: 14px 25px;
+            font-size: 1em;
+            font-weight: 600;
+            border-radius: 30px;
+            box-shadow: 0 4px 10px rgba(211, 84, 0, 0.3);
+            transition: all 0.3s ease;
+            width: 80%;
+            text-align: center;
+        }
+
+        .yukle-buton:hover {
+            background-color: #b33921;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(211, 84, 0, 0.4);
+        }
+
+        /* Fotoğraf İndirme Butonu Stili */
+        .indir-buton {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #2c3e50;
+            color: white;
+            text-decoration: none;
+            padding: 12px 25px;
+            font-size: 0.95em;
+            font-weight: 600;
+            border-radius: 30px;
+            box-shadow: 0 4px 10px rgba(44, 62, 80, 0.3);
+            transition: all 0.3s ease;
+            margin-top: 5px;
+            margin-bottom: 25px;
+            width: 80%;
+            text-align: center;
+        }
+
+        .indir-buton:hover {
+            background-color: #1a252f;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(44, 62, 80, 0.4);
+        }
+
         /* Küçük Harita Önizleme Alanı */
         .harita-onizleme {
             width: 100%;
@@ -201,7 +274,8 @@
             flex-direction: column;
             align-items: center;
             margin-top: 15px;
-            scroll-margin-top: 40px; /* Menüden tıklayınca tam hizada dursun */
+            margin-bottom: 35px;
+            scroll-margin-top: 40px;
         }
 
         .gorsel-baslik {
@@ -221,7 +295,29 @@
             border: 4px solid #fff;
         }
 
-        /* 📱 MOBİL UYUMLULUK AYARLARI (Ekran küçüldüğünde menüyü üste alır) */
+        /* ORTA BOYUTLU EKRANLAR İÇİN DİNAMİK AYAR */
+        @media (min-width: 901px) and (max-width: 1150px) {
+            .sol-menu {
+                left: 10px;
+                width: 160px;
+            }
+            .sol-menu a {
+                font-size: 0.78em;
+                padding: 6px 8px;
+            }
+            .container {
+                margin-left: 170px;
+            }
+        }
+        
+        /* Geniş ekranlarda içeriği rahatlatmak için */
+        @media (min-width: 1151px) {
+            .container {
+                margin-left: 210px; 
+            }
+        }
+
+        /* MOBİL UYUMLULUK AYARLARI */
         @media (max-width: 900px) {
             body {
                 flex-direction: column;
@@ -250,18 +346,19 @@
             }
 
             .sol-menu a {
-                font-size: 0.8em;
-                padding: 6px 10px;
+                font-size: 0.72em;
+                padding: 6px 6px;
+                text-align: center;
             }
 
             .sol-menu a:hover {
-                padding-left: 10px;
+                padding-left: 6px;
                 background-color: #4a6741;
             }
 
             .container {
                 margin-left: 0;
-                margin-top: 80px; /* Üstteki menünün altında kalmasın diye */
+                margin-top: 85px;
                 width: 85%;
             }
         }
@@ -276,6 +373,7 @@
             <li><a href="#dugun-salonu">2. Düğün Salonu</a></li>
             <li><a href="#erkek-evi">3. Erkek Evi</a></li>
             <li><a href="#davetiye-karti">4. Davetiye Kartı</a></li>
+            <li><a href="#foto-paylas">5. Fotoğrafları Paylaşın</a></li>
         </ul>
     </nav>
 
@@ -296,10 +394,16 @@
 
         <!-- 2. Bölüm: Düğün Yeri Konumu -->
         <div class="konum-konteyner" id="dugun-salonu">
-            <div class="konum-baslik">📍 Düğün Salonu Konumu</div>
+            <div class="konum-baslik">💍 Düğün Salonu Konumu</div>
             <a href="https://maps.app.goo.gl/3EShF38dZWVp1t2TA" target="_blank" class="harita-buton">
                 Google Maps ile Yol Tarifi Al
             </a>
+            <div class="acik-adres">
+                Alyans Düğün Salonu, Efirli, Ordu
+            </div>
+            <div class="zaman-bilgisi">
+                ⏱ 20 Haziran Cumartesi, 19:00
+            </div>
             <div class="harita-onizleme">
                 <iframe src="https://maps.google.com/maps?q=Alyans%20D%C3%BC%C4%9F%C3%BCn%20Salonu,%20Efirl%C4%B1,%20Ordu&t=&z=16&ie=UTF8&iwloc=&output=embed" allowfullscreen="" loading="lazy"></iframe>
             </div>
@@ -311,6 +415,12 @@
             <a href="https://maps.app.goo.gl/WXMnQDxberdP3q6E7" target="_blank" class="harita-buton">
                 Google Maps ile Yol Tarifi Al
             </a>
+            <div class="acik-adres">
+                Bahçelievler Mahallesi, Denizciler Caddesi, No:33, Sıla Apartmanı, Final Lisesi Karşısı, Altınordu / Ordu
+            </div>
+            <div class="zaman-bilgisi">
+                ⏱ 19 Haziran Cuma 13:00 - 21:00
+            </div>
             <div class="harita-onizleme">
                 <iframe src="https://maps.google.com/maps?q=Bah%C3%A7elievler%20Mahallesi,%20Denizciler%20Caddesi,%20No:33,%20Ordu&t=&z=16&ie=UTF8&iwloc=&output=embed" allowfullscreen="" loading="lazy"></iframe>
             </div>
@@ -319,7 +429,25 @@
         <!-- 4. Bölüm: Görsel Davetiye -->
         <div class="gorsel-davetiye-konteyner" id="davetiye-karti">
             <div class="gorsel-baslik">✉️ Davetiye Kartı</div>
+            
+            <!-- İndirme Butonu -->
+            <a href="davetiye.jpeg" download="Seray_Mustafa_Davetiye.jpeg" class="indir-buton">
+                📥 Davetiyeyi Telefona İndir
+            </a>
+
             <img src="davetiye.jpeg" alt="Düğün Davetiyesi" class="davetiye-resim">
+        </div>
+
+        <!-- 5. Bölüm: Güvenli ve Gizli Fotoğraf Paylaşım Alanı -->
+        <div class="paylasim-konteyner" id="foto-paylas">
+            <div class="paylasim-baslik">📸 Fotoğrafları Bizimle Paylaşın</div>
+            <div class="paylasim-detay">
+                Bu mutlu günümüzde kadrajınıza takılan en güzel anıları bizimle güvenle paylaşabilirsiniz. Yüklediğiniz fotoğraflar doğrudan bize ulaşacaktır.
+            </div>
+            <!-- Google Forms'tan kopyalayacağın linki buradaki "href" tırnaklarının içine yapıştıracaksın -->
+            <a href="https://forms.gle/NgzDJK3jjLQGC2us9" target="_blank" class="yukle-buton">
+                ✨ Fotoğraf Yüklemek İçin Tıklayın
+            </a>
         </div>
 
     </div>
