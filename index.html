@@ -414,54 +414,60 @@
         }
 
         /* MOBİL UYUMLULUK AYARLARI */
-        @media (max-width: 900px) {
-            body {
-                flex-direction: column;
-                align-items: center;
-            }
+       /* 📱 MOBİL UYUMLULUK VE KULAKÇIK GİZLENME AYARLARI */
+@media (max-width: 900px) {
+    body {
+        flex-direction: column;
+        align-items: center;
+    }
 
-            .sol-menu {
-                position: fixed;
-                left: 0;
-                top: 0;
-                transform: none;
-                width: 100%;
-                padding: 10px 0;
-                border-radius: 0;
-                box-shadow: 0 2px 15px rgba(0,0,0,0.1);
-                border: none;
-                border-bottom: 2px solid #4a6741;
-                animation: none;
-            }
+    .sol-menu {
+        position: fixed;
+        left: 0;
+        top: 0;
+        transform: none;
+        width: 100%;
+        padding: 10px 0;
+        border-radius: 0;
+        box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        border: none;
+        border-bottom: 2px solid #4a6741;
+        animation: none;
+    }
 
-            .sol-menu ul {
-                display: flex;
-                justify-content: space-around;
-                align-items: center;
-            }
+    .sol-menu ul {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
 
-            .sol-menu li {
-                margin-bottom: 0;
-            }
+    .sol-menu li {
+        margin-bottom: 0;
+    }
 
-            .sol-menu a {
-                font-size: 0.72em;
-                padding: 8px 6px;
-                text-align: center;
-                box-shadow: none;
-            }
+    .sol-menu a {
+        font-size: 0.72em;
+        padding: 8px 6px;
+        text-align: center;
+        box-shadow: none;
+    }
 
-            .sol-menu a:hover {
-                transform: none;
-                box-shadow: none;
-            }
+    .sol-menu a:hover {
+        transform: none;
+        box-shadow: none;
+    }
 
-            .container {
-                margin-left: 0;
-                margin-top: 85px;
-                width: 85%;
-            }
-        }
+    .container {
+        margin-left: 0;
+        margin-top: 85px;
+        width: 85%;
+    }
+
+    /* 🛠️ SİHİRLİ DOKUNUŞ: Tıklanan başlığın üst barın arkasında kalmasını önler */
+    #video-bolumu, .konum-konteyner, .paylasim-konteyner, .gorsel-davetiye-konteyner {
+        scroll-margin-top: 105px;
+    }
+}
 
         @keyframes menuDikkatMobil {
             0% { transform: translateY(-52%); }
