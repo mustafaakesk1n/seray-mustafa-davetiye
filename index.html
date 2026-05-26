@@ -206,7 +206,7 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            background-color: #d35400; /* Şık ve dikkat çekici turuncu tonu */
+            background-color: #d35400;
             color: white;
             text-decoration: none;
             padding: 14px 25px;
@@ -217,6 +217,7 @@
             transition: all 0.3s ease;
             width: 80%;
             text-align: center;
+            cursor: pointer;
         }
 
         .yukle-buton:hover {
@@ -295,6 +296,77 @@
             border: 4px solid #fff;
         }
 
+        /* 🖼️ DİNAMİK POP-UP (UYARI PENCERESİ) STİLLERİ */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        .popup-overlay.aktif {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .popup-kutu {
+            background-color: #ffffff;
+            padding: 30px 25px;
+            border-radius: 20px;
+            max-width: 400px;
+            width: 85%;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            text-align: center;
+            position: relative;
+            transform: scale(0.8);
+            transition: transform 0.4s ease;
+            border-top: 5px solid #4a6741; /* Davetiye yeşili ile uyumlu şık bir çizgi */
+        }
+
+        .popup-overlay.aktif .popup-kutu {
+            transform: scale(1);
+        }
+
+        .popup-kapat {
+            position: absolute;
+            top: 12px;
+            right: 15px;
+            font-size: 1.3em;
+            color: #999;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-weight: bold;
+            transition: color 0.2s;
+        }
+
+        .popup-kapat:hover {
+            color: #333;
+        }
+
+        .popup-ikon {
+            font-size: 2.5em;
+            margin-bottom: 12px;
+        }
+
+        .popup-metin {
+            font-size: 0.95em;
+            color: #2c3e50;
+            font-weight: 600;
+            line-height: 1.5;
+            margin: 0;
+        }
+
         /* ORTA BOYUTLU EKRANLAR İÇİN DİNAMİK AYAR */
         @media (min-width: 901px) and (max-width: 1150px) {
             .sol-menu {
@@ -366,6 +438,15 @@
 </head>
 <body>
 
+    <!-- Dinamik Pop-up (Uyarı Ekranı) Yapısı -->
+    <div id="tarihPopup" class="popup-overlay">
+        <div class="popup-kutu">
+            <button class="popup-kapat" onclick="popupKapat()">×</button>
+            <div class="popup-ikon">📸</div>
+            <p class="popup-metin">Fotoğrafları bizimle 20 Haziran itibariyle paylaşabilirsiniz, ilginiz için teşekkürler.</p>
+        </div>
+    </div>
+
     <!-- Sol Menü Bölümü -->
     <nav class="sol-menu">
         <ul>
@@ -416,7 +497,7 @@
                 Google Maps ile Yol Tarifi Al
             </a>
             <div class="acik-adres">
-                Bahçelievler Mahallesi, Denizciler Caddesi, No:33, Sıla Apartmanı, Final Kurs Karşısı, Altınordu / Ordu
+                Bahçelievler Mahallesi, Denizciler Caddesi, No:33, Sıla Apartmanı, Final Lisesi Karşısı, Altınordu / Ordu
             </div>
             <div class="zaman-bilgisi">
                 ⏱ 19 Haziran Cuma 13:00 - 21:00
@@ -438,19 +519,56 @@
             <img src="davetiye.jpeg" alt="Düğün Davetiyesi" class="davetiye-resim">
         </div>
 
-        <!-- 5. Bölüm: Güvenli ve Gizli Fotoğraf Paylaşım Alanı -->
+        <!-- 5. Bölüm: Akıllı Fotoğraf Paylaşım Alanı -->
         <div class="paylasim-konteyner" id="foto-paylas">
             <div class="paylasim-baslik">📸 Fotoğrafları Bizimle Paylaşın</div>
             <div class="paylasim-detay">
                 Bu mutlu günümüzde kadrajınıza takılan en güzel anıları bizimle güvenle paylaşabilirsiniz. Yüklediğiniz fotoğraflar doğrudan bize ulaşacaktır.
             </div>
-            <!-- Google Forms'tan kopyalayacağın linki buradaki "href" tırnaklarının içine yapıştıracaksın -->
-            <a href="https://forms.gle/NgzDJK3jjLQGC2us9" target="_blank" class="yukle-buton">
+            <!-- JS Kontrolü için 'onclick' fonksiyonu entegre edildi -->
+            <a onclick="fotoYuklemeKontrol(event)" class="yukle-buton">
                 ✨ Fotoğraf Yüklemek İçin Tıklayın
             </a>
         </div>
 
     </div>
+
+    <!-- 🧠 AKILLI TARİH KONTROLÜ VE POP-UP SCRIPT'I -->
+    <script>
+        var kapatmaZamanlayici;
+
+        function fotoYuklemeKontrol(event) {
+            event.preventDefault(); // Varsayılan tıklama davranışını durdur
+
+            // Hedef Tarih: 19 Haziran 2026
+            var hedefTarih = new Date(2026, 5, 19); // JS'de aylar 0'dan başlar (Ocak=0, Haziran=5)
+            var bugun = new Date();
+
+            // Eğer bugün, 19 Haziran 2026'dan önce ise Pop-up ekranı aç
+            if (bugun < hedefTarih) {
+                var popup = document.getElementById("tarihPopup");
+                popup.classList.add("aktif");
+
+                // Eğer önceden kalma bir zamanlayıcı varsa temizle
+                clearTimeout(kapatmaZamanlayici);
+
+                // Tam 6 saniye (6000 milisaniye) sonra otomatik kapat
+                kapatmaZamanlayici = setTimeout(function() {
+                    popupKapat();
+                }, 6000);
+            } 
+            // 19 Haziran 2026 ve sonrasında ise doğrudan Google Forms linkini yeni sekmede aç
+            else {
+                window.open("https://forms.gle/NgzDJK3jjLQGC2us9", "_blank");
+            }
+        }
+
+        // Pop-up ekranını manuel kapatma fonksiyonu
+        function popupKapat() {
+            document.getElementById("tarihPopup").classList.remove("aktif");
+            clearTimeout(kapatmaZamanlayici);
+        }
+    </script>
 
 </body>
 </html>
