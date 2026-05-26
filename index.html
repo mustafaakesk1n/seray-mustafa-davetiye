@@ -33,20 +33,28 @@
             color: #333;
         }
 
-        /* Sol Tarafa Sabitlenen Dinamik Menü Stili */
+        /* 🌟 YENİLENEN: Sol Tarafa Sabitlenen Dikkat Çekici Dinamik Menü Stili */
         .sol-menu {
             position: fixed;
             left: 20px;
             top: 50%;
             transform: translateY(-50%);
-            background-color: rgba(255, 255, 255, 0.95);
-            padding: 20px 15px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            backdrop-filter: blur(5px);
+            background-color: rgba(255, 255, 255, 0.96);
+            padding: 22px 16px;
+            border-radius: 18px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            backdrop-filter: blur(8px);
             z-index: 1000;
-            width: 190px;
-            transition: all 0.3s ease;
+            width: 195px;
+            border: 2px solid #4a6741; /* Menüyü belirginleştiren şık yeşil çerçeve */
+            /* Girişte dikkat çekmesi için eklenen yukarı-aşağı yumuşak hareket animasyonu */
+            animation: menuDikkat 3s ease-in-out infinite alternate;
+        }
+
+        /* Menüyü canlandıran hafif sallanma efekti */
+        @keyframes menuDikkat {
+            0% { transform: translateY(-52%); }
+            100% { transform: translateY(-48%); }
         }
 
         .sol-menu ul {
@@ -56,7 +64,7 @@
         }
 
         .sol-menu li {
-            margin-bottom: 12px;
+            margin-bottom: 14px;
         }
 
         .sol-menu li:last-child {
@@ -67,18 +75,35 @@
             text-decoration: none;
             color: #2c3e50;
             font-weight: 600;
-            font-size: 0.82em;
+            font-size: 0.85em;
             display: block;
-            padding: 8px 10px;
-            border-radius: 8px;
+            padding: 9px 12px;
+            border-radius: 10px;
             transition: all 0.3s ease;
+            background-color: rgba(0,0,0,0.02);
         }
 
-        /* Menü linklerine gelindiğinde (Hover) efekt */
+        /* Normal menü linklerine gelindiğinde (Hover) efekt */
         .sol-menu a:hover {
             background-color: #4a6741;
             color: white;
-            padding-left: 14px;
+            padding-left: 16px;
+            box-shadow: 0 4px 10px rgba(74, 103, 65, 0.2);
+        }
+
+        /* 🔥 ÖZEL MADDE: Fotoğrafları Paylaşın Linkini Aşırı Dikkat Çekici Yapma */
+        .sol-menu .vurgulu-link {
+            background-color: #d35400; /* Butonumuzla uyumlu canlı turuncu tonu */
+            color: white !important;
+            box-shadow: 0 4px 12px rgba(211, 84, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sol-menu .vurgulu-link:hover {
+            background-color: #b33921;
+            padding-left: 16px;
+            box-shadow: 0 6px 15px rgba(211, 84, 0, 0.4);
         }
 
         /* Sayfa içeriğini toplayan şeffaf panel */
@@ -330,7 +355,7 @@
             position: relative;
             transform: scale(0.8);
             transition: transform 0.4s ease;
-            border-top: 5px solid #4a6741; /* Davetiye yeşili ile uyumlu şık bir çizgi */
+            border-top: 5px solid #4a6741;
         }
 
         .popup-overlay.aktif .popup-kutu {
@@ -372,6 +397,7 @@
             .sol-menu {
                 left: 10px;
                 width: 160px;
+                animation: menuDikkatMobil 3s ease-in-out infinite alternate;
             }
             .sol-menu a {
                 font-size: 0.78em;
@@ -405,6 +431,9 @@
                 padding: 10px 0;
                 border-radius: 0;
                 box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+                border: none;
+                border-bottom: 2px solid #4a6741;
+                animation: none; /* Üst barda sallanma hareketini kapatıyoruz ki baş dönmesin */
             }
 
             .sol-menu ul {
@@ -428,11 +457,21 @@
                 background-color: #4a6741;
             }
 
+            /* Mobilde de 5. sıradaki parlayan yapıyı korumak için */
+            .sol-menu .vurgulu-link:hover {
+                padding-left: 6px;
+            }
+
             .container {
                 margin-left: 0;
                 margin-top: 85px;
                 width: 85%;
             }
+        }
+
+        @keyframes menuDikkatMobil {
+            0% { transform: translateY(-52%); }
+            100% { transform: translateY(-48%); }
         }
     </style>
 </head>
@@ -447,14 +486,15 @@
         </div>
     </div>
 
-    <!-- Sol Menü Bölümü -->
+    <!-- Sol Menü Bölümü (Yenilenen Vurgulu Tasarım) -->
     <nav class="sol-menu">
         <ul>
             <li><a href="#video-bolumu">1. Davetiye</a></li>
             <li><a href="#dugun-salonu">2. Düğün Salonu</a></li>
             <li><a href="#erkek-evi">3. Erkek Evi</a></li>
             <li><a href="#davetiye-karti">4. Davetiye Kartı</a></li>
-            <li><a href="#foto-paylas">5. Fotoğrafları Paylaşın</a></li>
+            <!-- class="vurgulu-link" eklenerek dikkat çekiciliği maksimuma çıkarıldı -->
+            <li><a href="#foto-paylas" class="vurgulu-link">📸 5. Fotoğraf Paylaşın</a></li>
         </ul>
     </nav>
 
@@ -525,7 +565,7 @@
             <div class="paylasim-detay">
                 Bu mutlu günümüzde kadrajınıza takılan en güzel anıları bizimle güvenle paylaşabilirsiniz. Yüklediğiniz fotoğraflar doğrudan bize ulaşacaktır.
             </div>
-            <!-- JS Kontrolü için 'onclick' fonksiyonu entegre edildi -->
+            <!-- Google Forms linkini buradaki tırnağın içine eklemeyi unutma -->
             <a onclick="fotoYuklemeKontrol(event)" class="yukle-buton">
                 ✨ Fotoğraf Yüklemek İçin Tıklayın
             </a>
@@ -533,37 +573,32 @@
 
     </div>
 
-    <!-- 🧠 AKILLI TARİH KONTROLÜ VE POP-UP SCRIPT'I -->
+    <!-- AKILLI TARİH KONTROLÜ VE POP-UP SCRIPT'I -->
     <script>
         var kapatmaZamanlayici;
 
         function fotoYuklemeKontrol(event) {
-            event.preventDefault(); // Varsayılan tıklama davranışını durdur
+            event.preventDefault();
 
             // Hedef Tarih: 19 Haziran 2026
-            var hedefTarih = new Date(2026, 5, 19); // JS'de aylar 0'dan başlar (Ocak=0, Haziran=5)
+            var hedefTarih = new Date(2026, 5, 19); 
             var bugun = new Date();
 
-            // Eğer bugün, 19 Haziran 2026'dan önce ise Pop-up ekranı aç
             if (bugun < hedefTarih) {
                 var popup = document.getElementById("tarihPopup");
                 popup.classList.add("aktif");
 
-                // Eğer önceden kalma bir zamanlayıcı varsa temizle
                 clearTimeout(kapatmaZamanlayici);
 
-                // Tam 6 saniye (6000 milisaniye) sonra otomatik kapat
                 kapatmaZamanlayici = setTimeout(function() {
                     popupKapat();
                 }, 6000);
             } 
-            // 19 Haziran 2026 ve sonrasında ise doğrudan Google Forms linkini yeni sekmede aç
             else {
-                window.open("https://forms.gle/NgzDJK3jjLQGC2us9", "_blank");
+                window.open("BURAYA_GOOGLE_FORMS_LINKINI_YAPISTIRIN", "_blank");
             }
         }
 
-        // Pop-up ekranını manuel kapatma fonksiyonu
         function popupKapat() {
             document.getElementById("tarihPopup").classList.remove("aktif");
             clearTimeout(kapatmaZamanlayici);
